@@ -5,7 +5,11 @@ import './App.css';
 
 function App(props) {
   return (
-    <FormComp label='test label' value='some value'/>
+    <form>
+      <FormComp label='test label' value='some value'/>
+      <input type='submit' value='Submit'/>
+    </form>
+    
   );
 }
 
