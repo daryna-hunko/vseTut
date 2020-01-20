@@ -10,7 +10,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <FormComp label='Test text' inputValue='Test value'/>
+      <FormComp label='Test text' value='Test value'/>
     );
   }
 }
