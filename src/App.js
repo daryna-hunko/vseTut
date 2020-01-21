@@ -4,7 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 
 function App(props) {
-  const [controlledValue, setControlledValue] = useState((props.value !== undefined) ? props.value : 'some value');
+  const [controlledValue, setControlledValue] = useState('some value');
 
   return (
     <form>
