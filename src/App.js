@@ -4,9 +4,11 @@ import logo from './logo.svg';
 import './App.css';
 
 function App(props) {
+  const [controlledValue, setControlledValue] = useState((props.value !== undefined) ? props.value : 'some value');
+
   return (
     <form>
-      <FormComp label='test label' value='some value'/>
+      <FormComp label='test label' value={controlledValue} onChange={(e) => setControlledValue(e.target.value)}/>
       <input type='submit' value='Submit'/>
     </form>
     
