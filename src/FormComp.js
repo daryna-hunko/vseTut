@@ -6,7 +6,7 @@ function FormComp(props) {
   return (
     <label>
       {props.label}
-      <input type="text" value={props.value} />
+      <input type="text" value={props.value} onChange={props.onChange} />
     </label>
   );
 }
