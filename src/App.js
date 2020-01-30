@@ -13,13 +13,9 @@ const Form = styled.form`
 
 function App(props) {
   const [controlledValue, setControlledValue] = useState('some value');
-  const Data = {
-    'required': true,
-    'onClick': alert('Hooray!')
-  };
   return (
     <Form>
-      <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} {...Data}/>
+      <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')} onKeyDown={() => alert('onKeyDown')}/>
       <input type='submit' value='Submit'/>
     </Form>
     

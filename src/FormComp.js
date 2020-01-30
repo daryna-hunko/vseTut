@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const Label = styled.label`
+const Div = styled.div`
   display: block;
   text-align: center;
   margin: 25px auto 0;
@@ -17,10 +17,12 @@ const Input = styled.input`
 function FormComp(props) {
 
   return (
-    <Label>
-      {props.label}
+    <>
+      <Div onClick={props.onClick}>
+        {props.label}
+      </Div>
       <Input type="text" value={props.value} onChange={props.onChange}  {...props}/>
-    </Label>
+    </>
   );
 }
 
