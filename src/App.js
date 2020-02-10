@@ -15,7 +15,7 @@ function App(props) {
   const [controlledValue, setControlledValue] = useState('some value');
   return (
     <Form>
-      <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')} onKeyDown={() => alert('onKeyDown')}/>
+      <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
       <input type='submit' value='Submit'/>
     </Form>
     
