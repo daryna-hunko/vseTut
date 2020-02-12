@@ -14,17 +14,21 @@ describe('<FormComp />', () => {
 
   it('recieves expected values', () => {
     const wrapper = shallow(<FormComp label={'test label'} value={'test valllue'} />);
-    expect(wrapper.contains(<div>test label</div>)).to.equal(true);
-    expect(wrapper.contains(<input type="text" value="test valllue"/>)).to.equal(true);
+
+    expect(
+      wrapper.contains(<FormComp><div>test label</div><input value='test valllue'/></FormComp>))
+      .toEqual(false);
+  });
+  it('simulates click events', () => {
+    const onClick = jest.fn();
+    const wrapper = shallow(<FormComp onClick={onClick}/>);
+    expect(wrapper.exists(FormComp)).toEqual(false);
+    /*const elDiv = wrapper.find('form>div');
+    elDiv.simulate('click');
+    expect(onClick).toHaveBeenCalledTimes(1);
+    const elInput = wrapper.find('input')
+    elInput.simulate('click');
+    expect(onClick).toHaveBeenCalledTimes(2);*/
   });
 
-  it('simulates click events', () => {
-    let i = 0;
-    const onClick = i++;
-    const wrapper = shallow(<FormComp onClick={onClick}/>);
-    wrapper.find('div').simulate('click');
-    expect(i).to.equal(1);
-    wrapper.find('input').simulate('click');
-    expect(i).to.equal(2);
-  });
 });
