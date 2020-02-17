@@ -16,10 +16,7 @@ describe('<FormComp />', () => {
 
   it('recieves expected values', () => {
     const wrapper = mount(<FormComp value={'test label'} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')} />);
-    //console.log(wrapper.debug())
-    let a = wrapper.find('input');
-   // expect(a.contains('test label')).toEqual(true);
-    expect(wrapper.find('input')).toHaveProperty('value');
+    expect(wrapper.find('input').prop('value')).toEqual('test label');
   });
 
   it('simulates click events', () => {
