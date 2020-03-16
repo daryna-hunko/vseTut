@@ -13,7 +13,7 @@ function SelectBuilder(props) {
   );
   optionItems.unshift(emptyItem);
   return (
-    <Select className={props.className}>
+    <Select className={props.className} {...props}>
       {optionItems}
     </Select>
   );

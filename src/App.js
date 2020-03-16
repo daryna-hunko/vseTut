@@ -14,11 +14,10 @@ const Form = styled.form`
 
 
 function App(props) {
-  const Days = [];
+  let Days = [];
   const Monthes = [1,2,3,4,5,6,7,8,9,10,11,12];
   const Years = [];
-  const todayDate = new Date();
-  for (let i = 1900; i < 2021; i++) {
+  for (let i = 2021; i > 1900; i--) {
     Years.push(i);
   }
   for (let i = 1; i <= 31; i++) {
@@ -27,9 +26,10 @@ function App(props) {
 
   const [controlledValue, setControlledValue] = useState('some value');
   
-  const [controlledDays, setControlledDays] = useState(todayDate.getDay()),
-        [controlledMonthes, setControlledMonthes] = useState(todayDate.getMonth() + 1),
-        [controlledYears, setControlledYears] = useState(todayDate.getFullYear());
+  const [controlledDays, setControlledDays] = useState(''),
+        [controlledMonthes, setControlledMonthes] = useState(''),
+        [controlledYears, setControlledYears] = useState(''),
+        [controlledDayNumber, setControlledDayNumber] = useState(Days);
 
   return (
     <>
@@ -37,11 +37,19 @@ function App(props) {
         Days={Days} 
         Monthes={Monthes} 
         Years={Years} 
-        onDaysChange={(e) => setControlledDays(e.target.value)} 
-        onMonthesChange={(e) => setControlledMonthes(e.target.value)} 
-        onYearsChange={(e) => setControlledYears(e.target.value)} 
-      
-        TestAlert={(e)=> alert(e.target.value)}
+        onDaysChange={(e) => {
+          setControlledDays(e.target.value);
+          outputer(e.target.value, controlledMonthes, controlledYears);
+        }} 
+        onMonthesChange={(e) => {
+          setControlledMonthes(e.target.value);
+          outputer(controlledDays, e.target.value, controlledYears);
+          //setControlledDayNumber(e.target.value);
+        }} 
+        onYearsChange={(e) => {
+          setControlledYears(e.target.value);
+          outputer(controlledDays, controlledMonthes, e.target.value);
+        }} 
       />
       <Form>
         <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
@@ -49,6 +57,16 @@ function App(props) {
       </Form>
     </>
   );
+}
+
+function outputer(a, b, c) {
+  if (a.length !== 0 && b.length !== 0 && c.length !== 0) {
+    document.querySelector('.date-picker-output').innerText = a + ' ' + b + ' ' + c;
+  }
+}
+
+function daysInMonth (month, year = 2020) { // Use 1 for January, 2 for February, etc.
+  return new Date(year, month, 0).getDate();
 }
 
 export default App;

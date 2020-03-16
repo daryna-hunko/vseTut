@@ -3,12 +3,16 @@ import styled from 'styled-components';
 import SelectBuilder from './SelectBuilderComp.js';
 
 const Div = styled.div`
-  display: block;
   text-align: center;
   margin: 0 auto;
   padding: 25px 0;
   font-size: 24px;
   border-bottom: 1px solid #000;
+`; 
+
+const OutputDiv = styled.div`
+  height: 25px;
+  padding: 25px 0;
 `; 
 
 
@@ -17,25 +21,15 @@ function DatePicker(props) {
   return (
     <Div>
       <div>
-        <SelectBuilder className='date-select' numbers={props.Days} onChange={props.TestAlert} />
-        <SelectBuilder className='month-select' numbers={props.Monthes} onChange={props.setControlledMonthes}/>
-        <SelectBuilder className='year-select' numbers={props.Years} onChange={props.setControlledYears} />
+        <SelectBuilder className='date-select' numbers={props.Days} onChange={props.onDaysChange} />
+        <SelectBuilder className='month-select' numbers={props.Monthes} onChange={props.onMonthesChange}/>
+        <SelectBuilder className='year-select' numbers={props.Years} onChange={props.onYearsChange} />
       </div>
-      <div className="date-picker-output"></div>
+      <OutputDiv className="date-picker-output"></OutputDiv>
     </Div>
   );
 }
 
-function outputer(a, b, c) {
-  //if (a.length != 0 && b.length != 0 && c.length != 0) {
-    document.querySelector('.date-picker-output').innerText = a + ' ' + b + ' ' + c;
-  //}
-}
 
-
-
-function daysInMonth (month, year) { // Use 1 for January, 2 for February, etc.
-  return new Date(year, month, 0).getDate();
-}
   
 export default DatePicker;
