@@ -17,19 +17,19 @@ function App(props) {
   let Days = [];
   const Monthes = [1,2,3,4,5,6,7,8,9,10,11,12];
   const Years = [];
-  for (let i = 2021; i > 1900; i--) {
-    Years.push(i);
-  }
-  for (let i = 1; i <= 31; i++) {
-    Days.push(i);
-  }
-
   const [controlledValue, setControlledValue] = useState('some value');
   
   const [controlledDays, setControlledDays] = useState(''),
         [controlledMonthes, setControlledMonthes] = useState(''),
-        [controlledYears, setControlledYears] = useState(''),
-        [controlledDayNumber, setControlledDayNumber] = useState(Days);
+        [controlledYears, setControlledYears] = useState('');
+        
+  for (let i = 2020; i > 1900; i--) {
+    Years.push(i);
+  }
+  for (let i = 1; i <= (daysInMonth(controlledMonthes, controlledYears) || 31); i++) {
+    Days.push(i);
+  }
+
 
   return (
     <>
@@ -44,7 +44,6 @@ function App(props) {
         onMonthesChange={(e) => {
           setControlledMonthes(e.target.value);
           outputer(controlledDays, e.target.value, controlledYears);
-          //setControlledDayNumber(e.target.value);
         }} 
         onYearsChange={(e) => {
           setControlledYears(e.target.value);
@@ -65,8 +64,8 @@ function outputer(a, b, c) {
   }
 }
 
-function daysInMonth (month, year = 2020) { // Use 1 for January, 2 for February, etc.
-  return new Date(year, month, 0).getDate();
+function daysInMonth (month = 1, year = 2020) { // Use 1 for January, 2 for February, etc.
+  return +(new Date(year, month, 0).getDate());
 }
 
 export default App;

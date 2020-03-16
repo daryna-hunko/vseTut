@@ -6,6 +6,7 @@ const Select = styled.select`
 `; 
 
 function SelectBuilder(props) {
+  //console.log(props.numbers)
   const numbers = props.numbers;
   const emptyItem = <option key={'empty'}></option>;
   const optionItems = numbers.map((number) =>
