@@ -17,9 +17,9 @@ function DatePicker(props) {
   return (
     <Div>
       <div>
-        <SelectBuilder className='date-select' numbers={props.Days}  />
-        <SelectBuilder className='month-select' numbers={props.Monthes} />
-        <SelectBuilder className='year-select' numbers={props.Years} onChange={props.onYearsChange} onFocus={props.onClick} />
+        <SelectBuilder className='date-select' numbers={props.Days} onChange={props.TestAlert} />
+        <SelectBuilder className='month-select' numbers={props.Monthes} onChange={props.setControlledMonthes}/>
+        <SelectBuilder className='year-select' numbers={props.Years} onChange={props.setControlledYears} />
       </div>
       <div className="date-picker-output"></div>
     </Div>

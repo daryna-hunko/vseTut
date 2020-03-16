@@ -38,10 +38,10 @@ function App(props) {
         Monthes={Monthes} 
         Years={Years} 
         onDaysChange={(e) => setControlledDays(e.target.value)} 
-        onMonthesChange={(e) => {setControlledMonthes(e.target.value)}} 
-        onYearsChange={(e) => {setControlledYears(e.target.value); console.log(controlledYears)}} 
+        onMonthesChange={(e) => setControlledMonthes(e.target.value)} 
+        onYearsChange={(e) => setControlledYears(e.target.value)} 
       
-        onClick={()=> alert('onClick')}
+        TestAlert={(e)=> alert(e.target.value)}
       />
       <Form>
         <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
