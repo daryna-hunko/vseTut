@@ -27,8 +27,8 @@ const Label = styled.label`
 function DatePicker(props) {
   const [controlledDays, setControlledDays] = useState(''),
         [controlledMonthes, setControlledMonthes] = useState(''),
-        [controlledYears, setControlledYears] = useState(''),
-        [controlledDate, setControlledDate] = useState('');
+        [controlledYears, setControlledYears] = useState('');
+        //[controlledDate, setControlledDate] = useState('');
   let Days = [];
   const Monthes = [1,2,3,4,5,6,7,8,9,10,11,12];
   const Years = [];
@@ -48,7 +48,7 @@ function DatePicker(props) {
         Enter date or choose it: 
         <Input className="date-picker-input" placeholder="dd-mm-yyyy" onChange={(e) => {
           if (validateDate(e.target.value)) {
-            setControlledDate(e.target.value);
+            //setControlledDate(e.target.value);
             document.querySelector('.date-picker-output').innerText = e.target.value;
           } else {
             alertErr();
@@ -96,32 +96,16 @@ function validateDate(date) {
     if (DateArr[2] > 1900 && DateArr[2] <= 2020) {
       if (DateArr[1] > 0 && DateArr[1] <= 12) {
         if (DateArr[0] > 0 && DateArr[0] <= daysInMonth (DateArr[1], DateArr[2])) {
-         /* setControlledDate(DateArr[0]);
-          setControlledMonthes(DateArr[1]);
-          setControlledYears(DateArr[2]);
-          selectOption('.date-select', controlledDays);
-          selectOption('.month-select', controlledMonthes);
-          selectOption('.year-select', controlledYears);*/
           return true;
         }
       }
     }
   }
-
   return false;
 }
 
 function alertErr() {
   document.querySelector('.date-picker-output').innerText = 'didn\`t get any valid data';
-}
-
-function selectOption(className, value) {
-  if (document.querySelector(className) != undefined) {
-      const select = document.querySelector(className).getElementsByTagName('option');
-    for (let i = 0; i < select.length; i++) {
-        if (select[i].value == value.toString()) select[i].selected = true;
-    }
-  }
 }
   
 export default DatePicker;
