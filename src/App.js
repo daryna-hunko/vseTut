@@ -25,8 +25,9 @@ function App(props) {
 
   return (
     <>
-      <DatePicker date={birthday} onChange={'d'}/>
+      <DatePicker date={birthday} />
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
+      
       <Form>
         <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
         <input type='submit' value='Submit'/>
