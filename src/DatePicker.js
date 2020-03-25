@@ -31,26 +31,29 @@ function DatePicker(props) {
       <div>
         <SelectBuilder className='date-select' numbers={Days} onChange={(e) => {
           setControlledDays(e.target.value);
-          outputer(controlledYears,  controlledMonthes, e.target.value);
+          props.onChange(controlledYears + '-' + controlledMonthes + '-' + e.target.value);
         }} />
         <SelectBuilder className='month-select' numbers={Monthes} onChange={(e) => {
           setControlledMonthes(e.target.value);
-          outputer(controlledYears, e.target.value, controlledDays);
+          if (e.target.value == 2 && +controlledDays > daysInMonth (2, controlledYears)) {
+            setControlledDays(undefined);
+            props.onChange(controlledYears + '-' + e.target.value + '-' + undefined);
+          } else {
+            props.onChange(controlledYears + '-' + e.target.value + '-' + controlledDays);
+          }
         }} />
         <SelectBuilder className='year-select' numbers={Years} onChange={(e) => {
           setControlledYears(e.target.value);
-          outputer(e.target.value, controlledMonthes, controlledDays);
+          if (controlledMonthes == 2 && +controlledDays > daysInMonth (2, e.target.value)) {
+            setControlledDays(undefined);
+            props.onChange(e.target.value + '-' + controlledMonthes + '-' + undefined);
+          } else {
+            props.onChange(e.target.value + '-' + controlledMonthes + '-' + controlledDays);
+          }
         }} />
       </div>
     </Div>
   );
-}
-
-
-function outputer(a, b, c) {
-  if (a.length !== 0 && b.length !== 0 && c.length !== 0) {
-    document.querySelector('.date-picker-output').innerText = a + ' ' + b + ' ' + c;
-  }
 }
 
 function daysInMonth (month = 1, year = 2020) { // Use 1 for January, 2 for February, etc.
