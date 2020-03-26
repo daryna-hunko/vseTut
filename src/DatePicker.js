@@ -35,7 +35,10 @@ function DatePicker(props) {
       setControlledDays('');
       props.onChange('undefined');
     } else {
-      props.onChange(controlledYears + '-' + e.target.value + '-' + controlledDays);
+      (controlledDays.length !== 0) ?
+        props.onChange(controlledYears + '-' + e.target.value + '-' + controlledDays) 
+        :
+        props.onChange('undefined');
     }
   },
     onYearChange = (e) => {
@@ -44,7 +47,10 @@ function DatePicker(props) {
       setControlledDays('');
       props.onChange('undefined');
     } else {
-      props.onChange(e.target.value + '-' + controlledMonthes + '-' + controlledDays);
+      (controlledDays.length !== 0) ?
+        props.onChange(e.target.value + '-' + controlledMonthes + '-' + controlledDays)
+        :
+        props.onChange('undefined');
     }
   };
 
