@@ -31,26 +31,26 @@ function DatePicker(props) {
   },
     onMonthChange = (e) => {
     setControlledMonthes(e.target.value);
-    if (e.target.value == 2 && +controlledDays > daysInMonth (2, controlledYears)) {
+    if (+controlledDays > daysInMonth (2, controlledYears)) {
       setControlledDays('');
-      props.onChange('undefined');
+      props.onChange('');
     } else {
       (controlledDays.length !== 0) ?
         props.onChange(controlledYears + '-' + e.target.value + '-' + controlledDays) 
         :
-        props.onChange('undefined');
+        props.onChange('');
     }
   },
     onYearChange = (e) => {
     setControlledYears(e.target.value);
-    if (controlledMonthes == 2 && +controlledDays > daysInMonth (2, e.target.value)) {
+    if (+controlledDays > daysInMonth (2, e.target.value)) {
       setControlledDays('');
-      props.onChange('undefined');
+      props.onChange('');
     } else {
       (controlledDays.length !== 0) ?
         props.onChange(e.target.value + '-' + controlledMonthes + '-' + controlledDays)
         :
-        props.onChange('undefined');
+        props.onChange('');
     }
   };
 
