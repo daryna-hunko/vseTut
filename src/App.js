@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import FormComp from './FormComp.js';
 import DatePicker from './DatePicker.js';
+import XOGame from './XOGame.js';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -25,6 +26,8 @@ function App(props) {
 
   return (
     <>
+      <XOGame />
+
       <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
 
