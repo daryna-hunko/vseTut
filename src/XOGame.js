@@ -53,6 +53,7 @@ function XOGame(props) {
       resetGame = () => {
         arr = [[,,,],[,,,],[,,,]]
         setControlledResult(arr);
+        setControlledTurn(1);
       };
 
 
