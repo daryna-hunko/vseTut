@@ -27,7 +27,7 @@ function App(props) {
   const [controlledGameResult, setControlledGameResult] = useState([[,,,],[,,,],[,,,]]);
   return (
     <>
-      <XOGame game={controlledGameResult}/>
+      <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]}/>
 
       <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
