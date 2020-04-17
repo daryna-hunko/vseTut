@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import XOGameTitle from './XOGameTitle.js';
 
 const Field = styled.table`
   width: 321px;
@@ -18,6 +17,7 @@ const Col = styled.td`
 `; 
 
 function XOGameField(props) {
+  const [controlledArr, setControlledArr] = useState(props.arr);
   const numRows = props.size[0],
         numCols = props.size[1];
   
@@ -26,10 +26,11 @@ function XOGameField(props) {
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
-      cols.push(<Col key={'col-'+ i + j} onClick={props.move(i,j)}>{props.arr[i][j]}</Col>);
+      cols.push(<Col key={'col-'+ i + j} onClick={(i,j) => console.log(i)}>{controlledArr[i][j]}</Col>);
     }
     field.push(<Row key={'row-' + i}>{cols}</Row>);
   }
+  //console.log(props.arr)
 
   return (
       <Field>

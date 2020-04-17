@@ -30,10 +30,10 @@ function XOGame(props) {
         }
       },
       toggleTurn = () => (controlledTurn) ? setControlledTurn(0) : setControlledTurn(1),
-      move = (a, b) => addVal(a, b),
+      //move = (a, b) => addVal(a, b),
       resetGame = () => {
-        arr = [[,,,],[,,,],[,,,]]
-        setControlledResult(arr);
+        arr = props.newGame;
+        setControlledResult(props.newGame);
         setControlledTurn(1);
       };
 
@@ -43,7 +43,7 @@ function XOGame(props) {
       <Btn onClick={() => resetGame()}>Новая игра</Btn>
       <XOGameTitle player={player}  />
 
-      <XOGameField arr={arr} size={props.size} move={(a, b) => addVal(a, b)}/>
+      <XOGameField arr={arr} size={props.size} onClick={(a,b) => addVal(a,b)}/>
     </Div>
   );
 }

@@ -23,11 +23,11 @@ function App(props) {
   const [controlledValue, setControlledValue] = useState('some value');
   const [birthday, setBirthday] = useState(new Date().toISOString().split('T')[0]); // текущая дата как начальное значение
   //const isInvalid = isNaN(new Date(birthday)); // true для даты Invalid Date
-
-  const [controlledGameResult, setControlledGameResult] = useState([[,,,],[,,,],[,,,]]);
+  let xosize = [[,,,],[,,,],[,,,]];
+  const [controlledGameResult, setControlledGameResult] = useState(xosize);
   return (
     <>
-      <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]}/>
+      <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]} newGame={xosize}/>
 
       <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
