@@ -23,7 +23,7 @@ function App(props) {
   const [controlledValue, setControlledValue] = useState('some value');
   const [birthday, setBirthday] = useState(new Date().toISOString().split('T')[0]); // текущая дата как начальное значение
   //const isInvalid = isNaN(new Date(birthday)); // true для даты Invalid Date
-  let xosize = [[,,,],[,,,],[,,,]];
+  const xosize = [[,,,],[,,,],[,,,]];
   const [controlledGameResult, setControlledGameResult] = useState(xosize);
   return (
     <>
