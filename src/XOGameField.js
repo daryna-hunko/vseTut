@@ -17,26 +17,27 @@ const Col = styled.td`
 `; 
 
 function XOGameField(props) {
-  const [controlledArr, setControlledArr] = useState(props.arr);
+  const [controlledArr, setControlledArr] = useState([...props.arr]);
   const numRows = props.size[0],
         numCols = props.size[1];
   
-  const field = [];
+  const field = [],
+        resetArr = [...props.newGame];
+  
   let move = (a, b) => addVal(a, b),
-      arr = controlledArr,
-        addVal = (a, b) => {
-          if (arr[a][b] === undefined && props.preventClicks === undefined) {
-            arr[a][b] = props.player;
-            let winnerCheck = winner3x3(arr);
-            console.log(winnerCheck)
-            if (winnerCheck !== undefined) props.returnWinner(winnerCheck);
-            props.toggleTurn();
-            setControlledArr(arr);
-            props.returnArr(arr,winnerCheck);
-            //console.log(winnerCheck)
-            //console.log(winner3x3(arr))
-          }
-        },
+      arr = (props.reset) ? resetArr.concat() : controlledArr,
+      addVal = (a, b) => {
+        if (arr[a][b] === undefined && props.preventClicks === undefined) {
+          arr[a][b] = props.player;
+
+          let winnerCheck = winner3x3(arr);
+          if (winnerCheck !== undefined) props.returnWinner(winnerCheck);
+
+          props.toggleTurn();
+          setControlledArr([...arr]);
+          props.returnArr([...arr],winnerCheck,0);
+        }
+      },
       winner3x3 = (someArr) => {
         if (someArr[0][0]!== undefined) {
           if (someArr[0][0] == someArr[1][0] && someArr[1][0] == someArr[2][0]) return someArr[0][0];
@@ -60,15 +61,20 @@ function XOGameField(props) {
         return undefined;
       };
 
+  //(props.reset) ? arr = resetArr : arr = controlledArr;
+
+  //if (props.reset) setControlledArr(resetArr)
+  //setControlledArr(arr)
+   
+  console.log(resetArr)
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
       let clickPosition = [i, j];
-      cols.push(<Col key={'col-'+ i + j} onClick={() => move(clickPosition[0], clickPosition[1])}>{controlledArr[i][j]}</Col>);
+      cols.push(<Col key={'col-'+ i + j} onClick={() => move(clickPosition[0], clickPosition[1])}>{arr[i][j]}</Col>);
     }
     field.push(<Row key={'row-' + i}>{cols}</Row>);
   }
-  //console.log(props.arr)
 
   return (
       <Field>

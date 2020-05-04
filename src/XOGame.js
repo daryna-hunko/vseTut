@@ -15,19 +15,23 @@ const Div = styled.div`
 
 function XOGame(props) {
   const [controlledTurn, setControlledTurn] = useState(1),
-        [controlledResult, setControlledResult] = useState(props.game),
-        [controlledIsWinner, setControlledIsWinner] = useState(undefined);
+        [controlledResult, setControlledResult] = useState(props.game.concat()),
+        [controlledIsWinner, setControlledIsWinner] = useState(undefined),
+        [controlledReset, setControlledReset] = useState(0),
+        newGame = [...props.newGame];
 
   let player = (controlledTurn) ? 'X' : '0',
       toggleTurn = () => (controlledTurn) ? setControlledTurn(0) : setControlledTurn(1),
       resetGame = () => {
+        setControlledReset(1);
         setControlledTurn(1);
-        setControlledResult(props.newGame);
+        setControlledResult(newGame);
         setControlledIsWinner(undefined);
       },
       winner,
       preventClicks;
 
+ //console.log(controlledReset)
   if (controlledIsWinner !== undefined ) {
     winner = controlledIsWinner;
     preventClicks = 1;
@@ -46,7 +50,9 @@ function XOGame(props) {
                     player={player}
                     preventClicks={preventClicks}
                     returnWinner={(a) => setControlledTurn(a)}
-                    returnArr={(a, b) => {setControlledResult(a); setControlledIsWinner(b);}}/>
+                    returnArr={(a, b, c) => {setControlledResult(a); setControlledIsWinner(b); setControlledReset(c);}}
+                    reset={controlledReset}
+                    newGame={newGame}/>
     </Div>
   );
 }
