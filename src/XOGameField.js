@@ -17,12 +17,12 @@ const Col = styled.td`
 `; 
 
 function XOGameField(props) {
-  const [controlledArr, setControlledArr] = useState([...props.arr]);
+  const [controlledArr, setControlledArr] = useState(props.arr.map(el => [...el]));
   const numRows = props.size[0],
         numCols = props.size[1];
   
   const field = [],
-        resetArr = [...props.newGame];
+        resetArr = props.newGame.map(el => [...el]);
   
   let move = (a, b) => addVal(a, b),
       arr = (props.reset) ? resetArr.concat() : controlledArr,
@@ -34,8 +34,8 @@ function XOGameField(props) {
           if (winnerCheck !== undefined) props.returnWinner(winnerCheck);
 
           props.toggleTurn();
-          setControlledArr([...arr]);
-          props.returnArr([...arr],winnerCheck,0);
+          setControlledArr(arr);
+          props.returnArr(arr,winnerCheck,0);
         }
       },
       winner3x3 = (someArr) => {
@@ -60,13 +60,7 @@ function XOGameField(props) {
         
         return undefined;
       };
-
-  //(props.reset) ? arr = resetArr : arr = controlledArr;
-
-  //if (props.reset) setControlledArr(resetArr)
-  //setControlledArr(arr)
    
-  console.log(resetArr)
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
