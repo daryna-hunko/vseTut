@@ -2,7 +2,10 @@ import React, {useState} from 'react';
 import FormComp from './FormComp.js';
 import DatePicker from './DatePicker.js';
 import XOGame from './XOGame.js';
+import CustomDropDown from './customDropDown.js';
 import styled from 'styled-components';
+//import { Provider } from 'react-redux';
+//import store from './store';
 
 const Form = styled.form`
   display: block;
@@ -25,9 +28,14 @@ function App(props) {
   //const isInvalid = isNaN(new Date(birthday)); // true для даты Invalid Date
   const xosize = [[,,,],[,,,],[,,,]];
   const [controlledGameResult, setControlledGameResult] = useState(xosize);
+  const customDropDownData = ['str1','str2','str3','str4','str5','str6','str7','str8','str9','str10','str11','str12','str13','str14','str15',];
+  
+
   return (
     <>
       <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]} newGame={xosize}/>
+
+      <CustomDropDown items={customDropDownData} onSelected={(e) => console.log(e.target.value)} />
 
       <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
