@@ -1,14 +1,28 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const DropDown = styled.select`
+const DropDown = styled.div`
   text-align: center;
   margin: 15px auto;
-  display: block;
   width: 150px;
+  border: 1px solid #ccc;
+  height: 25px;
+  overflow-y: hidden;
+  &.open {
+    height: 100px;
+    overflow-y: scroll;
+  }
 `; 
-const Option = styled.option`
+const Option = styled.div`
   text-align: center;
+  border-bottom: 1px solid #ccc;
+  padding: 2px 0;
+  &:last-child {
+    border-bottom: none;
+  }
+  ${DropDown.open} &:hover {
+    background: #ccc;
+  }
 `; 
 const Title = styled.p`
   text-align: center;
@@ -19,11 +33,11 @@ function CustomDropDown(props) {
     const listItems = numbers.map((number) =>
       <Option key={number} value={number}>{number}</Option>
     );
-    document.addEventListener("DOMContentLoaded", () => {document.querySelector('.CustomDropDown').size = numbers.length;})
+    
     return (
       <>
         <Title>Custom DropDown</Title>
-        <DropDown className='CustomDropDown' onChange={props.onSelected}>
+        <DropDown className='closed' onChange={props.onSelected}>
             {listItems}
         </DropDown>
       </>
