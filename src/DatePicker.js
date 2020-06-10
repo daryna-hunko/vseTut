@@ -7,6 +7,7 @@ const Div = styled.div`
   margin: 0 auto;
   padding: 25px 0;
   font-size: 24px;
+  border-top: 1px solid #000;
 `; 
 
 

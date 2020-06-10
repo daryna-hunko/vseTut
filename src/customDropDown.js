@@ -1,27 +1,44 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const DropDown = styled.div`
-  text-align: center;
-  margin: 15px auto;
-  width: 150px;
-  border: 1px solid #ccc;
-  height: 25px;
-  overflow-y: hidden;
-  &.open {
-    height: 100px;
-    overflow-y: scroll;
+const DropDownWrap = styled.div`
+  margin: 0 auto 25px;
+  height: 23px;
+  width: 200px;
+  overflow: hidden;
+  position: relative;
+  &:hover {
+    overflow: visible;
+    .DropDownList {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+    }
   }
 `; 
-const Option = styled.div`
+const DropDownHeader = styled.div`
   text-align: center;
-  border-bottom: 1px solid #ccc;
-  padding: 2px 0;
-  &:last-child {
-    border-bottom: none;
-  }
-  ${DropDown.open} &:hover {
-    background: #ccc;
+  border: 1px solid #ccc;
+  cursor: pointer;
+`; 
+const DropDownTitle = styled.div`
+  text-align: center;
+`; 
+const DropDownList = styled.ul`
+  text-align: center;
+  list-style: none;
+  border: 1px solid #ccc;
+  border-top: none;
+  margin: 0;
+  padding: 0;
+  background: #fff;
+`; 
+const Option = styled.li`
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0,0,0,.3);
   }
 `; 
 const Title = styled.p`
@@ -29,17 +46,24 @@ const Title = styled.p`
 `; 
 
 function CustomDropDown(props) {
+    const [checkedValue, setCheckedValue] = useState('Select value');
     const numbers = props.items.map((el) => el);
-    const listItems = numbers.map((number) =>
-      <Option key={number} value={number}>{number}</Option>
+    const listItems = numbers.map((number, i) =>
+      <Option key={i} value={number} onClick={()=> setCheckedValue(number)}>{number}</Option>
     );
+
     
     return (
       <>
         <Title>Custom DropDown</Title>
-        <DropDown className='closed' onChange={props.onSelected}>
+        <DropDownWrap>
+          <DropDownHeader>
+            <DropDownTitle>{checkedValue}</DropDownTitle>
+          </DropDownHeader>
+          <DropDownList>
             {listItems}
-        </DropDown>
+          </DropDownList>
+        </DropDownWrap>
       </>
     );
   }
