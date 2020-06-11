@@ -44,9 +44,8 @@ const Title = styled.p`
 
 function CustomDropDown(props) {
     const [checkedValue, setCheckedValue] = useState('Select value');
-    const numbers = props.items.map((el) => el);
-    const listItems = numbers.map((number, i) =>
-      <Option key={i} value={number} onClick={()=> setCheckedValue(number)}>{number}</Option>
+    const listItems = props.items.map((el, i) =>
+      <Option key={i} value={el} onClick={()=> setCheckedValue(el)}>{el}</Option>
     );
 
     
