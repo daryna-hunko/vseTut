@@ -19,7 +19,14 @@ const OutputDiv = styled.div`
   padding: 25px 0;
   border-bottom: 1px solid #000;
 `; 
-
+ 
+const Option = styled.li`
+  text-align: center;
+  cursor: pointer;
+  &:hover {
+    background: rgba(0,0,0,.3);
+  }
+`; 
 
 
 function App(props) {
@@ -35,7 +42,7 @@ function App(props) {
     <>
       <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]} newGame={xosize}/>
 
-      <CustomDropDown items={customDropDownData} onSelected={(e) => console.log(e.target.value)} />
+      <CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
 
       <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
       <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
