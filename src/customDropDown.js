@@ -22,9 +22,6 @@ const DropDownHeader = styled.div`
   border: 1px solid #ccc;
   cursor: pointer;
 `; 
-const DropDownTitle = styled.div`
-  text-align: center;
-`; 
 const DropDownList = styled.ul`
   text-align: center;
   list-style: none;
@@ -58,7 +55,7 @@ function CustomDropDown(props) {
         <Title>Custom DropDown</Title>
         <DropDownWrap>
           <DropDownHeader>
-            <DropDownTitle>{checkedValue}</DropDownTitle>
+            {checkedValue}
           </DropDownHeader>
           <DropDownList>
             {listItems}
