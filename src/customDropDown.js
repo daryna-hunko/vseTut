@@ -42,14 +42,13 @@ const Title = styled.p`
   text-align: center;
 `; 
 
+CustomDropDown.defaultProps = {
+  myRenderItem: (el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>
+}
+
 function CustomDropDown(props) {
     const [checkedValue, setCheckedValue] = useState('Select value');
-    const listItems = (props.myRenderItem) ? 
-        props.items.map((el, i) => props.myRenderItem(el, i, () => setCheckedValue(el)))
-      : 
-        props.items.map((el, i) =>
-       <Option key={i} value={el} onClick={() => setCheckedValue(el)}>{el}</Option>);
-
+    const listItems = props.items.map((el, i) => props.myRenderItem(el, i, () => setCheckedValue(el)));
     
     return (
       <>
