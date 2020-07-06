@@ -4,8 +4,9 @@ import DatePicker from './DatePicker.js';
 import XOGame from './XOGame.js';
 import CustomDropDown from './customDropDown.js';
 import styled from 'styled-components';
-//import { Provider } from 'react-redux';
-//import store from './store';
+
+import { Provider } from 'react-redux';
+import store from './redux/store.js';
 
 const Form = styled.form`
   display: block;
@@ -40,7 +41,9 @@ function App(props) {
 
   return (
     <>
-      <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]} newGame={xosize}/>
+      <Provider store={store}>
+        <XOGame game={controlledGameResult} size={[controlledGameResult.length, controlledGameResult[0].length]} newGame={xosize}/>
+      </Provider>
 
       <CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
 
@@ -51,6 +54,7 @@ function App(props) {
         <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
         <input type='submit' value='Submit'/>
       </Form>
+      
     </>
   );
 }
