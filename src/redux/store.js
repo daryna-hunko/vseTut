@@ -1,4 +1,8 @@
 import { createStore } from "redux";
-import rootReducer from "./reducers.js";
+import todos from "./reducers.js";
 
-export default createStore(rootReducer);
+const store = createStore(todos);
+
+export default store;
+
+//store.subscribe(() => console.log('store.subscribe', store.getState()))

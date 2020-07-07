@@ -15,7 +15,4 @@ function XOGameResetter(props) {
   );
 }
 
-
-
-
 export default XOGameResetter;

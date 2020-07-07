@@ -1,4 +1,3 @@
-import { combineReducers } from "redux";
 import { NEXT_TURN, RESET_GAME } from "./actionTypes";
 
 const initialState = {
@@ -23,9 +22,11 @@ function todos(state = initialState, action) {
         }
       }
       case RESET_GAME: {
+        //  console.log(action);
         return {
           ...state,
           gameField: [[,,,],[,,,],[,,,]],
+          nextPlayer: 'X',
           winner: undefined
         }
       }
@@ -34,4 +35,4 @@ function todos(state = initialState, action) {
     }
   }
 
-export default combineReducers({ todos });
+export default todos;

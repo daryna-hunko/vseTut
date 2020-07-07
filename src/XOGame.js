@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import styled from 'styled-components';
 import XOGameTitle from './XOGameTitle.js';
 import XOGameField from './XOGameField.js';
@@ -20,7 +21,7 @@ function XOGame(props) {
         [controlledIsWinner, setControlledIsWinner] = useState(undefined),
         [controlledReset, setControlledReset] = useState(0);
 
-  let player = (controlledTurn) ? 'X' : '0',
+  let player = props.currentStore.nextPlayer,
       toggleTurn = () => (controlledTurn) ? setControlledTurn(0) : setControlledTurn(1),
       resetGame = () => {
         setControlledReset(1);
@@ -32,17 +33,21 @@ function XOGame(props) {
       preventClicks;
 
   if (controlledIsWinner !== undefined ) {
+    
     winner = controlledIsWinner;
+    
     preventClicks = 1;
   }
 
+  console.log(props.currentStore)
+
   return (
     <Div>
-      <XOGameResetter resetGame={resetGame}/>
+      <XOGameResetter resetGame={() => props.onResetGame()}/>
       <XOGameTitle player={player}  />
-      <XOGameWinnerBlock winner={winner}/>
+      <XOGameWinnerBlock winner={winner} />
       <XOGameField  arr={controlledResult} 
-                    size={props.size} 
+                    size={[props.currentStore.gameField.length, props.currentStore.gameField[0].length]}
                     toggleTurn={toggleTurn} 
                     player={player}
                     preventClicks={preventClicks}
@@ -57,4 +62,11 @@ function XOGame(props) {
 
 
 
-export default XOGame;
+export default connect(
+  state => ({
+    currentStore: state
+  }),
+  dispatch => ({
+    onResetGame: () => dispatch({type: 'RESET_GAME'})
+  })
+)(XOGame);
