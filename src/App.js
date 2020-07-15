@@ -42,7 +42,7 @@ function App(props) {
   return (
     <>
       <Provider store={store}>
-        <XOGame game={controlledGameResult}  newGame={xosize}/>
+        <XOGame />
       </Provider>
 
       <CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />

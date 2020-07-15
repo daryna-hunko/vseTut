@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 const Field = styled.table`
@@ -17,55 +18,50 @@ const Col = styled.td`
 `; 
 
 function XOGameField(props) {
-  const [controlledArr, setControlledArr] = useState(props.arr.map(el => [...el]));
-  const numRows = props.size[0],
-        numCols = props.size[1];
-  
+  const numRows = props.currentStore.gameField.length,
+        numCols = props.currentStore.gameField[0].length;
   const field = [],
-        resetArr = props.newGame.map(el => [...el]);
+        currentGameField = props.currentStore.gameField,
+        winner3x3 = (someArr) => {
+                if (someArr[0][0]!== undefined) {
+                  if (someArr[0][0] == someArr[1][0] && someArr[1][0] == someArr[2][0]) return someArr[0][0];
+                  if (someArr[0][0] == someArr[0][1] && someArr[0][1] == someArr[0][2]) return someArr[0][0];
+                  if (someArr[0][0] == someArr[1][1] && someArr[1][1] == someArr[2][2]) return someArr[0][0];
+                }
+                if (someArr[0][2]!== undefined) {
+                  if (someArr[0][2] == someArr[1][2] && someArr[1][2] == someArr[2][2]) return someArr[0][2];
+                  if (someArr[0][2] == someArr[1][1] && someArr[1][1] == someArr[2][0]) return someArr[0][2];
+                }
+                if (someArr[0][1]!== undefined && someArr[0][1] == someArr[1][1] && someArr[1][1] == someArr[2][1]) {
+                  return someArr[0][1];
+                }
+                if (someArr[1][0]!== undefined && someArr[1][0] == someArr[1][1] && someArr[1][1] == someArr[1][2]) {
+                  return someArr[1][0];
+                }
+                if (someArr[2][0]!== undefined && someArr[2][0] == someArr[2][1] && someArr[2][1] == someArr[2][2]) {
+                  return someArr[2][0];
+                }
+                
+                return undefined;
+              }
   
-  let move = (a, b) => addVal(a, b),
-      arr = (props.reset) ? resetArr.concat() : controlledArr,
-      addVal = (a, b) => {
-        if (arr[a][b] === undefined && props.preventClicks === undefined) {
-          arr[a][b] = props.player;
-
-          let winnerCheck = winner3x3(arr);
-          if (winnerCheck !== undefined) props.returnWinner(winnerCheck);
-
-          props.toggleTurn();
-          setControlledArr(arr);
-          props.returnArr(arr,winnerCheck,0);
-        }
-      },
-      winner3x3 = (someArr) => {
-        if (someArr[0][0]!== undefined) {
-          if (someArr[0][0] == someArr[1][0] && someArr[1][0] == someArr[2][0]) return someArr[0][0];
-          if (someArr[0][0] == someArr[0][1] && someArr[0][1] == someArr[0][2]) return someArr[0][0];
-          if (someArr[0][0] == someArr[1][1] && someArr[1][1] == someArr[2][2]) return someArr[0][0];
-        }
-        if (someArr[0][2]!== undefined) {
-          if (someArr[0][2] == someArr[1][2] && someArr[1][2] == someArr[2][2]) return someArr[0][2];
-          if (someArr[0][2] == someArr[1][1] && someArr[1][1] == someArr[2][0]) return someArr[0][2];
-        }
-        if (someArr[0][1]!== undefined && someArr[0][1] == someArr[1][1] && someArr[1][1] == someArr[2][1]) {
-          return someArr[0][1];
-        }
-        if (someArr[1][0]!== undefined && someArr[1][0] == someArr[1][1] && someArr[1][1] == someArr[1][2]) {
-          return someArr[1][0];
-        }
-        if (someArr[2][0]!== undefined && someArr[2][0] == someArr[2][1] && someArr[2][1] == someArr[2][2]) {
-          return someArr[2][0];
-        }
-        
-        return undefined;
-      };
    
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
       let clickPosition = [i, j];
-      cols.push(<Col key={'col-'+ i + j} onClick={() => move(clickPosition[0], clickPosition[1])}>{arr[i][j]}</Col>);
+      cols.push(<Col 
+                  key={'col-'+ i + j} 
+                  onClick={() => {
+                                  if (currentGameField[clickPosition[0]][clickPosition[1]] === undefined) {
+                                      currentGameField[clickPosition[0]][clickPosition[1]] = props.currentStore.nextPlayer; 
+                                      console.log(currentGameField)
+                                      props.onClickEvent(currentGameField)
+                                    }
+                                }
+                          }
+                  >{props.currentStore.gameField[i][j]}
+                </Col>);
     }
     field.push(<Row key={'row-' + i}>{cols}</Row>);
   }
@@ -79,5 +75,11 @@ function XOGameField(props) {
   );
 }
 
-
-export default XOGameField;
+export default connect(
+  state => ({
+    currentStore: state
+  }),
+  dispatch => ({
+    onClickEvent: (currentGameField) => dispatch({type: 'NEXT_TURN', arr: currentGameField})
+  })
+)(XOGameField);

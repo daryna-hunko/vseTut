@@ -15,46 +15,15 @@ const Div = styled.div`
 `; 
 
 function XOGame(props) {
-  const newGame = props.newGame.map(el => [...el]),
-        [controlledTurn, setControlledTurn] = useState(1),
-        [controlledResult, setControlledResult] = useState(props.game.map((el) => [...el])),
-        [controlledIsWinner, setControlledIsWinner] = useState(undefined),
-        [controlledReset, setControlledReset] = useState(0);
-
-  let player = props.currentStore.nextPlayer,
-      toggleTurn = () => (controlledTurn) ? setControlledTurn(0) : setControlledTurn(1),
-      resetGame = () => {
-        setControlledReset(1);
-        setControlledTurn(1);
-        setControlledResult(newGame);
-        setControlledIsWinner(undefined);
-      },
-      winner,
-      preventClicks;
-
-  if (controlledIsWinner !== undefined ) {
-    
-    winner = controlledIsWinner;
-    
-    preventClicks = 1;
-  }
 
   console.log(props.currentStore)
 
   return (
     <Div>
       <XOGameResetter resetGame={() => props.onResetGame()}/>
-      <XOGameTitle player={player}  />
-      <XOGameWinnerBlock winner={winner} />
-      <XOGameField  arr={controlledResult} 
-                    size={[props.currentStore.gameField.length, props.currentStore.gameField[0].length]}
-                    toggleTurn={toggleTurn} 
-                    player={player}
-                    preventClicks={preventClicks}
-                    returnWinner={(a) => setControlledTurn(a)}
-                    returnArr={(a, b, c) => {setControlledResult(a); setControlledIsWinner(b); setControlledReset(c);}}
-                    reset={controlledReset}
-                    newGame={newGame}/>
+      <XOGameTitle player={props.currentStore.nextPlayer}  />
+      <XOGameWinnerBlock winner={props.currentStore.winner} />
+      <XOGameField />
     </Div>
   );
 }

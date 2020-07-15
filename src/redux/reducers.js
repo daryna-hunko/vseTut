@@ -12,11 +12,13 @@ function todos(state = initialState, action) {
         if (state.nextPlayer == 'X') {
             return {
                 ...state,
+                gameField: action.arr,
                 nextPlayer: 'O'
             } 
         } else {
             return {
                 ...state,
+                gameField: action.arr,
                 nextPlayer: 'X'
             } 
         }
