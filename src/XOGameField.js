@@ -21,30 +21,7 @@ function XOGameField(props) {
   const numRows = props.currentStore.gameField.length,
         numCols = props.currentStore.gameField[0].length;
   const field = [],
-        currentGameField = props.currentStore.gameField,
-        winner3x3 = (someArr) => {
-                if (someArr[0][0]!== undefined) {
-                  if (someArr[0][0] == someArr[1][0] && someArr[1][0] == someArr[2][0]) return someArr[0][0];
-                  if (someArr[0][0] == someArr[0][1] && someArr[0][1] == someArr[0][2]) return someArr[0][0];
-                  if (someArr[0][0] == someArr[1][1] && someArr[1][1] == someArr[2][2]) return someArr[0][0];
-                }
-                if (someArr[0][2]!== undefined) {
-                  if (someArr[0][2] == someArr[1][2] && someArr[1][2] == someArr[2][2]) return someArr[0][2];
-                  if (someArr[0][2] == someArr[1][1] && someArr[1][1] == someArr[2][0]) return someArr[0][2];
-                }
-                if (someArr[0][1]!== undefined && someArr[0][1] == someArr[1][1] && someArr[1][1] == someArr[2][1]) {
-                  return someArr[0][1];
-                }
-                if (someArr[1][0]!== undefined && someArr[1][0] == someArr[1][1] && someArr[1][1] == someArr[1][2]) {
-                  return someArr[1][0];
-                }
-                if (someArr[2][0]!== undefined && someArr[2][0] == someArr[2][1] && someArr[2][1] == someArr[2][2]) {
-                  return someArr[2][0];
-                }
-                
-                return undefined;
-              }
-  
+        currentGameField = props.currentStore.gameField;
    
   for (let i = 0; i < numRows; i++) {
     let cols = [];
@@ -53,7 +30,7 @@ function XOGameField(props) {
       cols.push(<Col 
                   key={'col-'+ i + j} 
                   onClick={() => {
-                                  if (currentGameField[clickPosition[0]][clickPosition[1]] === undefined) {
+                                  if (currentGameField[clickPosition[0]][clickPosition[1]] === undefined && props.currentStore.winner === undefined) {
                                       currentGameField[clickPosition[0]][clickPosition[1]] = props.currentStore.nextPlayer; 
                                       console.log(currentGameField)
                                       props.onClickEvent(currentGameField)
