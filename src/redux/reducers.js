@@ -3,7 +3,8 @@ import { NEXT_TURN, RESET_GAME } from "./actionTypes";
 const initialState = {
     gameField: [[,,,],[,,,],[,,,]],
     winner: undefined,
-    nextPlayer: 'X'
+    nextPlayer: 'X',
+    gamesHistory: new Array()
 };
 
 function todos(state = initialState, action) {
@@ -30,6 +31,7 @@ function todos(state = initialState, action) {
     return undefined;
   };
 
+
   switch (action.type) {
     case NEXT_TURN: {
       if (winner3x3(action.arr) !== undefined) {
@@ -38,14 +40,16 @@ function todos(state = initialState, action) {
               ...state,
               gameField: action.arr,
               nextPlayer: 'O',
-              winner: 'X'
+              winner: 'X',
+              gamesHistory: action.gamesHistory
             } 
         } else {
             return {
               ...state,
               gameField: action.arr,
               nextPlayer: 'X',
-              winner: 'O'
+              winner: 'O',
+              gamesHistory: action.gamesHistory
             } 
         }
       } else {

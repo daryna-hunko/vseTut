@@ -10,7 +10,7 @@ const Div = styled.div`
 function XOGameWinnerBlock(props) {
   let winner;
   if (props.winner !== undefined) {
-    (props.winner == 'X' || props.winner == '0') ? winner = 'Победил ' + props.winner : winner = 'Ничья';
+    (props.winner == 'X' || props.winner == 'O') ? winner = 'Победил ' + props.winner : winner = 'Ничья';
   }
 
   return (
@@ -19,6 +19,5 @@ function XOGameWinnerBlock(props) {
     </>
   );
 }
-
 
 export default XOGameWinnerBlock;

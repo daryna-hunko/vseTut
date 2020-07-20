@@ -32,8 +32,8 @@ function XOGameField(props) {
                   onClick={() => {
                                   if (currentGameField[clickPosition[0]][clickPosition[1]] === undefined && props.currentStore.winner === undefined) {
                                       currentGameField[clickPosition[0]][clickPosition[1]] = props.currentStore.nextPlayer; 
-                                      console.log(currentGameField)
-                                      props.onClickEvent(currentGameField)
+                                      console.log(history())
+                                      props.onClickEvent(currentGameField, history())
                                     }
                                 }
                           }
@@ -43,12 +43,27 @@ function XOGameField(props) {
     field.push(<Row key={'row-' + i}>{cols}</Row>);
   }
 
+  let history = () => {
+    let historyArr = [...props.currentStore.gamesHistory]
+    historyArr.push(new Date.getTime().toISOString() + ' winner: ' +  props.currentStore.nextPlayer)
+    return historyArr;
+  } 
+  
+
+
   return (
+    <>
       <Field>
         <tbody>
           {field}
         </tbody>
+        
+
       </Field>
+      <ul>
+         {props.currentStore.gamesHistory.map((el, i) => <li key={i}>{el}</li>)}
+      </ul>
+    </>
   );
 }
 
@@ -57,6 +72,6 @@ export default connect(
     currentStore: state
   }),
   dispatch => ({
-    onClickEvent: (currentGameField) => dispatch({type: 'NEXT_TURN', arr: currentGameField})
+    onClickEvent: (currentGameField, history) => dispatch({type: 'NEXT_TURN', arr: currentGameField, gamesHistory: history})
   })
 )(XOGameField);

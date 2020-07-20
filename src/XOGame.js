@@ -16,7 +16,7 @@ const Div = styled.div`
 
 function XOGame(props) {
 
-  console.log(props.currentStore)
+  //console.log(props.currentStore.gamesHistory)
 
   return (
     <Div>
