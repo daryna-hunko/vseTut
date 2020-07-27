@@ -2,9 +2,15 @@ import React, {useState} from 'react';
 import FormComp from './FormComp.js';
 import DatePicker from './DatePicker.js';
 import XOGame from './XOGame.js';
+import XOGameHistory from './XOGameHistory.js';
 import CustomDropDown from './customDropDown.js';
 import styled from 'styled-components';
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './redux/store.js';
 
@@ -42,22 +48,37 @@ function App(props) {
   return (
     <>
       <Provider store={store}>
-        <XOGame />
+        <Router>
+          <Link to="/">Home</Link>
+          &nbsp;
+          <Link to="/history">History</Link>
+
+          {/* A <Switch> looks through its children <Route>s and
+              renders the first one that matches the current URL. */}
+          <Switch>
+            <Route path="/">
+              <XOGame />
+            </Route>
+            <Route path="/history">
+              <XOGameHistory />
+            </Route>
+          </Switch>
+        </Router>
       </Provider>
-
-      <CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
-
-      <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
-      <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
-
-      <Form>
-        <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
-        <input type='submit' value='Submit'/>
-      </Form>
-      
     </>
   );
 }
 
+//temp remove other staff
+/*
+<CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
+
+<DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
+<OutputDiv className="date-picker-output">{birthday}</OutputDiv>
+
+<Form>
+  <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
+  <input type='submit' value='Submit'/>
+</Form>*/
 
 export default App;
