@@ -52,6 +52,8 @@ function App(props) {
           <Link to="/">Home</Link>
           &nbsp;
           <Link to="/history">History</Link>
+          &nbsp;
+          <Link to="/other">Other</Link>
 
           {/* A <Switch> looks through its children <Route>s and
               renders the first one that matches the current URL. */}
@@ -62,6 +64,17 @@ function App(props) {
             <Route path="/history">
               <XOGameHistory />
             </Route>
+            <Route path="/other">
+              <CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
+
+              <DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
+              <OutputDiv className="date-picker-output">{birthday}</OutputDiv>
+
+              <Form>
+                <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
+                <input type='submit' value='Submit'/>
+              </Form>
+            </Route>
           </Switch>
         </Router>
       </Provider>
@@ -69,16 +82,5 @@ function App(props) {
   );
 }
 
-//temp remove other staff
-/*
-<CustomDropDown items={customDropDownData} myRenderItem={(el, i, func) => <Option key={i} value={el} onClick={func}>{el}</Option>} />
-
-<DatePicker date={birthday} onChange={(data) => setBirthday(data)}/>
-<OutputDiv className="date-picker-output">{birthday}</OutputDiv>
-
-<Form>
-  <FormComp label={'test label'} value={controlledValue} onChange={(e) => setControlledValue(e.target.value)} onClick={() => alert('onClick')}/>
-  <input type='submit' value='Submit'/>
-</Form>*/
 
 export default App;
