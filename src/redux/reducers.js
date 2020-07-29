@@ -29,6 +29,12 @@ function todos(state = initialState, action) {
     }
     
     return undefined;
+   },
+  history = (history, winner) => {
+    let historyArr = [...history],
+    date = new Date();
+    historyArr.push(date + ' winner: ' +  winner);
+    return historyArr;
   };
 
 
@@ -41,7 +47,7 @@ function todos(state = initialState, action) {
               gameField: action.arr,
               nextPlayer: 'O',
               winner: 'X',
-              gamesHistory: action.gamesHistory
+              gamesHistory: history(state.gamesHistory, state.nextPlayer)
             } 
         } else {
             return {
@@ -49,7 +55,7 @@ function todos(state = initialState, action) {
               gameField: action.arr,
               nextPlayer: 'X',
               winner: 'O',
-              gamesHistory: action.gamesHistory
+              gamesHistory: history(state.gamesHistory, state.nextPlayer)
             } 
         }
       } else {
@@ -69,7 +75,6 @@ function todos(state = initialState, action) {
       }
     }
     case RESET_GAME: {
-      //  console.log(action);
       return {
         ...state,
         gameField: [[,,,],[,,,],[,,,]],

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import styled from 'styled-components';
 import XOGameTitle from './XOGameTitle.js';
@@ -15,25 +15,20 @@ const Div = styled.div`
 `; 
 
 function XOGame(props) {
-
-  //console.log(props.currentStore.gamesHistory)
-
   return (
     <Div>
       <XOGameResetter resetGame={() => props.onResetGame()}/>
-      <XOGameTitle player={props.currentStore.nextPlayer}  />
-      <XOGameWinnerBlock winner={props.currentStore.winner} />
+      <XOGameTitle player={props.nextPlayer}  />
+      <XOGameWinnerBlock winner={props.winner} />
       <XOGameField />
     </Div>
   );
 }
 
-
-
-
 export default connect(
   state => ({
-    currentStore: state
+    nextPlayer: state.nextPlayer,
+    winner: state.winner
   }),
   dispatch => ({
     onResetGame: () => dispatch({type: 'RESET_GAME'})

@@ -18,7 +18,4 @@ function XOGameTitle(props) {
   );
 }
 
-
-
-
 export default XOGameTitle;

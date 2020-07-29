@@ -5,7 +5,7 @@ function XOGameHistory(props) {
   return (
     <>
       <ul>
-         {props.currentStore.gamesHistory.map((el, i) => <li key={i}>{el}</li>)}
+         {props.gamesHistory.map((el, i) => <li key={i}>{el}</li>)}
       </ul>
     </>
   );
@@ -13,6 +13,6 @@ function XOGameHistory(props) {
 
 export default connect(
   state => ({
-    currentStore: state
+    gamesHistory: state.gamesHistory
   })
 )(XOGameHistory);

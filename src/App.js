@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import FormComp from './FormComp.js';
-import DatePicker from './DatePicker.js';
-import XOGame from './XOGame.js';
-import XOGameHistory from './XOGameHistory.js';
-import CustomDropDown from './customDropDown.js';
+import FormComp from './FormComp/FormComp.js';
+import DatePicker from './DatePicker/DatePicker.js';
+import XOGame from './XOGame/XOGame.js';
+import XOGameHistory from './XOGame/XOGameHistory.js';
+import CustomDropDown from './customDDown/customDropDown.js';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
