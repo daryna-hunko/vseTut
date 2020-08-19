@@ -57,6 +57,7 @@ function XOGameField(props) {
 export default connect(
   state => ({
     gameField: state.gameField,
+    winner: state.winner,
     nextPlayer: state.nextPlayer
   }),
   dispatch => ({

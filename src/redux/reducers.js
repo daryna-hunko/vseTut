@@ -4,7 +4,8 @@ const initialState = {
     gameField: [[,,,],[,,,],[,,,]],
     winner: undefined,
     nextPlayer: 'X',
-    gamesHistory: new Array()
+    gamesHistory: new Array(),
+    winnigField: ''
 };
 
 function todos(state = initialState, action) {
@@ -30,10 +31,13 @@ function todos(state = initialState, action) {
     
     return undefined;
    },
-  history = (history, winner) => {
+  history = (history, winner, field) => {
     let historyArr = [...history],
     date = new Date();
-    historyArr.push(date + ' winner: ' +  winner);
+    historyArr.push({winningDate: date,
+                     winnerIs: ' winner: ' +  winner,
+                     winnigField: field
+                    });
     return historyArr;
   };
 
@@ -47,7 +51,7 @@ function todos(state = initialState, action) {
               gameField: action.arr,
               nextPlayer: 'O',
               winner: 'X',
-              gamesHistory: history(state.gamesHistory, state.nextPlayer)
+              gamesHistory: history(state.gamesHistory, state.nextPlayer, action.arr)
             } 
         } else {
             return {
@@ -55,7 +59,7 @@ function todos(state = initialState, action) {
               gameField: action.arr,
               nextPlayer: 'X',
               winner: 'O',
-              gamesHistory: history(state.gamesHistory, state.nextPlayer)
+              gamesHistory: history(state.gamesHistory, state.nextPlayer, action.arr)
             } 
         }
       } else {
