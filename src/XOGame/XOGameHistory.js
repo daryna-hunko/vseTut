@@ -29,8 +29,8 @@ function XOGameHistory(props) {
           <Route exact path="/history">
             {gamesHistory}
           </Route>
-          <Route path="/history/LastWinningGame">
-            <XOGameField />
+          <Route path="/history/LastWinningGame" render={(location) => <XOGameField location={location}/>}>
+            
           </Route>
         </Switch>
 

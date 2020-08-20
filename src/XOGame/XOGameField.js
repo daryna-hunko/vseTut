@@ -23,12 +23,12 @@ function XOGameField(props) {
   const field = [],
         currentGameField = props.gameField;
 
-  //console.log(props.location.state.field)
+  console.log(props.location)
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
       let clickPosition = [i, j];
-      if (props.location.state.field == undefined) {
+      if (props.location == undefined) {
         cols.push(
           <Col key={'col-'+ i + j} 
               onClick={() => {
@@ -44,7 +44,7 @@ function XOGameField(props) {
       } else {
         cols.push(
           <Col key={'col-'+ i + j}>
-            {props.location.state.field[i][j]}
+            {props.location.location.state.field[i][j]}
           </Col>);
       }
     }
