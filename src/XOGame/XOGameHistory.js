@@ -20,14 +20,17 @@ function XOGameHistory(props) {
      <Router>
         <br/>
         &nbsp;&nbsp;
-        <Link to={"/history/LastWinningGame?winnigField=" + winnigField}>Last Winning Game</Link>
+        <Link to={{pathname: "/history/LastWinningGame", state: { field: winnigField }}}>
+          Last Winning Game
+        </Link>
 
+        
         <Switch>
           <Route exact path="/history">
             {gamesHistory}
           </Route>
-          <Route path={"/history/LastWinningGame?winnigField=" + winnigField}>
-            <XOGameField field={query.get("winnigField")}/>
+          <Route path="/history/LastWinningGame">
+            <XOGameField />
           </Route>
         </Switch>
 
