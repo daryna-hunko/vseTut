@@ -11,9 +11,7 @@ import XOGameField from './XOGameField.js';
 
 function XOGameHistory(props) {
   let gamesHistory = (props.gamesHistory != undefined) ? <ul>{props.gamesHistory.map((el, i) => <li key={i}>{el.winningDate + el.winnerIs}</li>)}</ul> : '',
-    winnigField = (props.gamesHistory.length != 0) ? props.gamesHistory[props.gamesHistory.length - 1].winnigField : '',
-    useQuery = () => new URLSearchParams(useLocation().search),
-    query = useQuery();
+    winnigField = (props.gamesHistory.length != 0) ? props.gamesHistory[props.gamesHistory.length - 1].winnigField : '';
 
   return (
     <>
@@ -29,9 +27,7 @@ function XOGameHistory(props) {
           <Route exact path="/history">
             {gamesHistory}
           </Route>
-          <Route path="/history/LastWinningGame" render={(location) => <XOGameField location={location}/>}>
-            
-          </Route>
+          <Route path="/history/LastWinningGame" render={(location) => <XOGameField location={location}/>} />
         </Switch>
 
       </Router>

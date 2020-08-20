@@ -23,7 +23,6 @@ function XOGameField(props) {
   const field = [],
         currentGameField = props.gameField;
 
-  console.log(props.location)
   for (let i = 0; i < numRows; i++) {
     let cols = [];
     for (let j = 0; j < numCols; j++) {
